@@ -1,15 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
 import { NavbarComponent } from '../../components/navbar-component/navbar-component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { AllDialogComponent } from '../../components/all-dialog/all-dialog';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DialogModule } from '@angular/cdk/dialog';
+
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Dialog } from '@angular/cdk/dialog';
 import { AllDo, Column } from '../../models/all.models';
 
 @Component({
   selector: 'app-board-component',
-  imports: [NavbarComponent, DragDropModule, CommonModule],
+  imports: [
+    NavbarComponent,
+    DragDropModule, 
+    CommonModule,
+    DialogModule
+  ],
   templateUrl: './board-component.html',
   styles: [
     `
@@ -57,6 +65,9 @@ export class BoardComponent {
   doing: AllDo[] = [];
   done: AllDo[] = [];
 
+  constructor(
+    private dialog: Dialog){}
+
   drop(event: CdkDragDrop<AllDo[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -68,5 +79,20 @@ export class BoardComponent {
         event.currentIndex
       );
     }
+  }
+
+  addColumn() {
+    this.columns.push({
+      title: 'New Column',
+      all: [],
+    })
+  }
+
+  openDialog(){
+    this.dialog.open(AllDialogComponent, {
+      minWidth: '300px',
+      maxWidth: '50%',
+      autoFocus: false,
+    })
   }
 }
