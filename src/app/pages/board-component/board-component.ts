@@ -88,11 +88,17 @@ export class BoardComponent {
     })
   }
 
-  openDialog(){
-    this.dialog.open(AllDialogComponent, {
+  openDialog(allDo: AllDo){
+    const dialogRef =this.dialog.open(AllDialogComponent, {
       minWidth: '300px',
       maxWidth: '50%',
       autoFocus: false,
+      data: {
+        all: allDo,
+      }
+    });
+    dialogRef.closed.subscribe(output => {
+      console.log(output);
     })
   }
 }
