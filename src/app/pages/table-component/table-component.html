@@ -1,1 +1,45 @@
-<p>table-component works!</p>
+<div class="flex flex-col h-screen">
+  <app-navbar-component />
+  <div class="w-full grow bg-white-600 p-6">
+
+    <h1 class="text-xl text-gray-700 font-semibold italic mb-5">Table</h1>
+
+    <table class="w-full text-sm text-left text-gray-500" cdk-table [dataSource]="products">
+      <tr cdk-header-row class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700"  *cdkHeaderRowDef="columns"></tr>
+      <tr cdk-row class="bg-white border-b" [ngClass]="{'bg-red-200' : row.price < 100}"  *cdkRowDef="let row; columns: columns"></tr>
+      <tr cdk-footer-row class="text-xl text-gray-700 uppercase bg-gray-200" *cdkFooterRowDef="columns"></tr>
+
+      <!-- Id Column -->
+      <ng-container cdkColumnDef="id">
+        <th cdk-header-cell class="py-6 px-6" *cdkHeaderCellDef>Id.</th>
+        <td cdk-cell class="py-4 px-6" *cdkCellDef="let row">{{ row.id }}</td>
+        <td cdk-footer-cell class="py-4 px-6" *cdkFooterCellDef="let row"></td>
+
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container cdkColumnDef="title">
+        <th cdk-header-cell class="py-6 px-6" *cdkHeaderCellDef>Title.</th>
+        <td cdk-cell  class="py-4 px-6"*cdkCellDef="let row">{{ row.title }}</td>
+        <td cdk-footer-cell class="py-4 px-6" *cdkFooterCellDef="let row"></td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container cdkColumnDef="price">
+        <th cdk-header-cell class="py-6 px-6" *cdkHeaderCellDef>Price.</th>
+        <td cdk-cell class="py-4 px-6" *cdkCellDef="let row">{{ row.price }}</td>
+        <td cdk-footer-cell class="py-4 px-6" *cdkFooterCellDef="let row">{{ total }}</td>
+      </ng-container>
+
+      <!-- Cover Column -->
+      <ng-container cdkColumnDef="cover">
+        <th cdk-header-cell class="py-6 px-6" *cdkHeaderCellDef>Cover.</th>
+        <td cdk-cell class="py-4 px-6" *cdkCellDef="let row">
+            <img [src]="row.images[0]" alt="" class="w-20">
+        </td>
+        <td cdk-footer-cell class="py-4 px-6" *cdkFooterCellDef="let row"></td>
+      </ng-container>
+
+    </table>
+  </div>
+</div>
