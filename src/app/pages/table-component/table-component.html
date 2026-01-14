@@ -7,7 +7,7 @@
 
     <table class="w-full text-sm text-left text-gray-500" cdk-table [dataSource]="dataSource">
       <tr cdk-header-row class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700"  *cdkHeaderRowDef="columns"></tr>
-      <tr cdk-row class="bg-white border-b" [ngClass]="{'bg-red-200' : row.price < 100}"  *cdkRowDef="let row; columns: columns"></tr>
+      <tr cdk-row class="border-b" [ngClass]="[row.price < 100 ? 'bg-red-200' : 'bg-white']"  *cdkRowDef="let row; columns: columns"></tr>
       <tr cdk-footer-row class="text-xl text-gray-700 uppercase bg-gray-200" *cdkFooterRowDef="columns"></tr>
 
       <!-- Id Column -->
@@ -45,11 +45,11 @@
       <ng-container cdkColumnDef="actions">
         <th cdk-header-cell class="py-6 px-6" *cdkHeaderCellDef>Actions.</th>
         <td cdk-cell class="py-4 px-6" *cdkCellDef="let row">
-            <app-btn-component (click)="update(row)"></app-btn-component>
+            <app-btn-component (click)="update(row)">Update</app-btn-component>
         </td>
         <td cdk-footer-cell class="py-4 px-6" *cdkFooterCellDef="let row"></td>
       </ng-container>
 
     </table>
-  </div>
+  </div>e
 </div>
