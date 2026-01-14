@@ -16,14 +16,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
 
+
 @Component({
   selector: 'app-boards-component',
   imports: [
     CommonModule,
-    NavbarComponent, 
-    FontAwesomeModule, 
-    CdkAccordionModule
-  ],
+    NavbarComponent,
+    FontAwesomeModule,
+    CdkAccordionModule,
+],
   templateUrl: './boards-component.html',
 })
 export class BoardsComponent {
